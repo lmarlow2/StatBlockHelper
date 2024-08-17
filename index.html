@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stat Block & Item Card Generator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Homebrewery Stat Block & Item Card Generator</h1>
+        
+        <!-- Creature Stat Block Form -->
+        <h2>Creature Stat Block</h2>
+        <form id="stat-block-form">
+            <label for="creature-name">Creature Name:</label>
+            <input type="text" id="creature-name" name="creature-name">
+            
+            <label for="creature-type">Creature Type:</label>
+            <input type="text" id="creature-type" name="creature-type">
+            
+            <label for="creature-hp">Hit Points:</label>
+            <input type="text" id="creature-hp" name="creature-hp">
+            
+            <label for="creature-ac">Armor Class:</label>
+            <input type="text" id="creature-ac" name="creature-ac">
+            
+            <label for="creature-speed">Speed:</label>
+            <input type="text" id="creature-speed" name="creature-speed">
+            
+            <!-- Add more fields as necessary -->
+            
+            <button type="button" onclick="generateStatBlock()">Generate Stat Block</button>
+        </form>
+        
+        <h2>Item Card</h2>
+        <!-- Item Card Form -->
+        <form id="item-card-form">
+            <label for="item-name">Item Name:</label>
+            <input type="text" id="item-name" name="item-name">
+            
+            <label for="item-type">Item Type:</label>
+            <input type="text" id="item-type" name="item-type">
+            
+            <label for="item-description">Description:</label>
+            <textarea id="item-description" name="item-description"></textarea>
+            
+            <!-- Add more fields as necessary -->
+            
+            <button type="button" onclick="generateItemCard()">Generate Item Card</button>
+        </form>
+        
+        <h2>Output</h2>
+        <pre id="output"></pre>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
