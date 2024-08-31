@@ -1,6 +1,7 @@
 function calculateBonus(stat){
     stat = Number(stat);
-    modifier = Math.floor((stat - 10)/2);
+    modifier = (stat - 10)/2;
+    modifier = (modifier > 0 ? Math.floor(modifier) : -1 * Math.round(Math.abs(modifier))) 
     return "(" + (modifier<0?"":"+") + modifier + ")";
 }
 
@@ -37,7 +38,7 @@ function generateStatBlock(){
     output += `> - **Speed** ${creatureSpeed}\n> ___\n`;
     output += `> | STR | DEX | CON | INT | WIS | CHA |\n`;
     output += `> |:---:|:---:|:---:|:---:|:---:|:---:|\n`;
-    output += `> | ${creatureStr} ${calculateBonus(creatureStr)} | ${creatureDex} ${calculateBonus(creatureDex)} | ${creatureCon}  ${calculateBonus(creatureCon)}| ${creatureInt}  ${calculateBonus(creatureInt)}| ${creatureWis}  ${calculateBonus(creatureWis)}| ${creatureCha}  ${calculateBonus(creatureCha)}|\n> ___\n`;
+    output += `> | ${creatureStr} ${calculateBonus(creatureStr)} | ${creatureDex} ${calculateBonus(creatureDex)} | ${creatureCon} ${calculateBonus(creatureCon)} | ${creatureInt} ${calculateBonus(creatureInt)} | ${creatureWis} ${calculateBonus(creatureWis)} | ${creatureCha} ${calculateBonus(creatureCha)} |\n> ___\n`;
 
     if(creatureSavingThrows){
         output += `> - **Saving Throws** ${creatureSavingThrows}\n`;
