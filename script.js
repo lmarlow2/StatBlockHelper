@@ -1,4 +1,10 @@
-function generateStatBlock() {
+function calculateBonus(stat){
+    stat = Number(stat);
+    modifier = Math.floor((stat - 10)/2);
+    return "(" + (modifier<0?"":"+") + modifier + ")";
+}
+
+function generateStatBlock(){
     const creatureName = document.getElementById('creature-name').value;
     const creatureType = document.getElementById('creature-type').value;
     const creatureAC = document.getElementById('creature-ac').value;
@@ -31,18 +37,18 @@ function generateStatBlock() {
     output += `> - **Speed** ${creatureSpeed}\n> ___\n`;
     output += `> | STR | DEX | CON | INT | WIS | CHA |\n`;
     output += `> |:---:|:---:|:---:|:---:|:---:|:---:|\n`;
-    output += `> | ${creatureStr} | ${creatureDex} | ${creatureCon} | ${creatureInt} | ${creatureWis} | ${creatureCha} |\n> ___\n`;
+    output += `> | ${creatureStr} ${calculateBonus(creatureStr)} | ${creatureDex} ${calculateBonus(creatureDex)} | ${creatureCon}  ${calculateBonus(creatureCon)}| ${creatureInt}  ${calculateBonus(creatureInt)}| ${creatureWis}  ${calculateBonus(creatureWis)}| ${creatureCha}  ${calculateBonus(creatureCha)}|\n> ___\n`;
 
-    if (creatureSavingThrows) {
+    if(creatureSavingThrows){
         output += `> - **Saving Throws** ${creatureSavingThrows}\n`;
     }
-    if (creatureSkills) {
+    if(creatureSkills){
         output += `> - **Skills** ${creatureSkills}\n`;
     }
-    if (creatureSenses) {
+    if(creatureSenses){
         output += `> - **Senses** ${creatureSenses}\n`;
     }
-    if (creatureLanguages) {
+    if(creatureLanguages){
         output += `> - **Languages** ${creatureLanguages}\n`;
     }
     output += `> - **Challenge** ${creatureChallenge} **Proficiency Bonus** +4\n> ___\n`;
@@ -51,7 +57,7 @@ function generateStatBlock() {
         output += `> ***${trait.split('.')[0]}.*** ${trait.substring(trait.indexOf('.') + 1)}\n>\n`;
     });
 
-    if (creatureSpellcasting) {
+    if(creatureSpellcasting){
         output += `> ### Spellcasting\n${creatureSpellcasting}\n`;
     }
 
@@ -60,21 +66,21 @@ function generateStatBlock() {
         output += `> ***${action.split('.')[0]}.*** ${action.substring(action.indexOf('.') + 1)}\n>\n`;
     });
 
-    if (creatureBonusActions.length > 0) {
+    if(creatureBonusActions.length > 0){
         output += `> ### Bonus Actions\n`;
         creatureBonusActions.forEach(action => {
             output += `> ***${action.split('.')[0]}.*** ${action.substring(action.indexOf('.') + 1)}\n>\n`;
         });
     }
 
-    if (creatureReactions.length > 0) {
+    if(creatureReactions.length > 0){
         output += `> ### Reactions\n`;
         creatureReactions.forEach(action => {
             output += `> ***${action.split('.')[0]}.*** ${action.substring(action.indexOf('.') + 1)}\n>\n`;
         });
     }
 
-    if (creatureLegendaryActions.length > 0) {
+    if(creatureLegendaryActions.length > 0){
         output += `> ### Legendary Actions\n`;
         output += `> ${creatureName} can take 3 legendary actions, choosing from the options below. Only one legendary action can be used at a time and only at the end of another creature's turn. ${creatureName} regains spent legendary actions at the start of its turn.\n>\n`;
         creatureLegendaryActions.forEach(action => {
@@ -84,7 +90,6 @@ function generateStatBlock() {
 
     document.getElementById('output').textContent = output;
 }
-
 
 function generateItemCard() {
     const itemName = document.getElementById('itemName').value;
@@ -118,23 +123,19 @@ function generateItemCard() {
     output += `> - **Weight:** ${itemWeight}\n`;
     output += `> - **Value:** ${itemValue}\n>\n`;
 
-    if (itemEnchantment) {
+    if(itemEnchantment){
         output += `> ### Enchantment\n>${itemEnchantment}\n>\n`;
     }
-
-    if (itemSpellCasting) {
+    if(itemSpellCasting){
         output += `> ### Spell Casting\n>${itemSpellCasting}\n>\n`;
     }
-
-    if (itemSpellDetails) {
+    if(itemSpellDetails){
         output += `___\n**At Will**\n${itemSpellDetails}\n>\n`;
     }
-
-    if (itemDailySpells) {
+    if(itemDailySpells){
         output += `___\n**1d6 Times per Day**\n${itemDailySpells}\n>\n`;
     }
-
-    if (itemWeeklySpells) {
+    if(itemWeeklySpells){
         output += `___\n**Once Per Week**\n${itemWeeklySpells}\n>\n`;
     }
 
