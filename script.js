@@ -143,3 +143,23 @@ function generateItemCard() {
     document.getElementById('output').textContent = output;
 }
 
+function copyOutputToClipboard(){
+    // Select the text content of the <pre> element
+    const outputElement = document.getElementById('output');
+    const range = document.createRange();
+    range.selectNode(outputElement);
+    window.getSelection().removeAllRanges(); // Clear any existing selections
+    window.getSelection().addRange(range);   // Select the content
+
+    try{
+        // Attempt to copy the selected text to the clipboard
+        const successful = document.execCommand('copy');
+        const msg = successful ? 'successful' : 'unsuccessful';
+        console.log('Copy command was ' + msg);
+    }catch(err){
+        console.error('Oops, unable to copy', err);
+    }
+
+    // Remove the selection
+    window.getSelection().removeAllRanges();
+}
