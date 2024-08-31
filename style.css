@@ -52,6 +52,48 @@ pre {
     overflow-x: auto;
 }
 
+.tabs {
+    position: relative;
+    margin: 20px 0;
+    width: 100%;
+}
+
+.tabs input[type="radio"] {
+    display: none;
+}
+
+.tabs label {
+    padding: 10px 20px;
+    display: inline-block;
+    margin-right: -1px;
+    cursor: pointer;
+    background-color: #ccc;
+    border-radius: 5px 5px 0 0;
+    font-weight: bold;
+}
+
+.tabs label:hover {
+    background-color: #bbb;
+}
+
+.tabs input[type="radio"]:checked + label {
+    background-color: #fff;
+    border-bottom: 2px solid #fff;
+}
+
+.content > div {
+    display: none;
+    padding: 20px;
+    border: 2px solid #ddd;
+    border-top: none;
+    background-color: #fff;
+}
+
+#tab1:checked ~ .content .content1,
+#tab2:checked ~ .content .content2 {
+    display: block;
+}
+
 /* Dark Mode Styles */
 @media (prefers-color-scheme: dark) {
     body {
@@ -108,5 +150,49 @@ pre {
         color: #f1f1f1;  /* Slightly lighter text for pre */
         padding: 20px;
         overflow-x: auto;
+    }
+
+    .tabs {
+        position: relative;
+        margin: 20px 0;
+        width: 100%;
+    }
+    
+    .tabs input[type="radio"] {
+        display: none;
+    }
+    
+    .tabs label {
+        padding: 10px 20px;
+        display: inline-block;
+        margin-right: -1px;
+        cursor: pointer;
+        background-color: #333333;
+        border-radius: 5px 5px 0 0;
+        font-weight: bold;
+        color: #dddddd;
+    }
+    
+    .tabs label:hover {
+        background-color: #444444;
+    }
+    
+    .tabs input[type="radio"]:checked + label {
+        background-color: #1e1e1e;
+        border-bottom: 2px solid #1e1e1e;
+        color: #ffffff;
+    }
+    
+    .content > div {
+        display: none;
+        padding: 20px;
+        border: 2px solid #444444;
+        border-top: none;
+        background-color: #2e2e2e;
+    }
+    
+    #tab1:checked ~ .content .content1,
+    #tab2:checked ~ .content .content2 {
+        display: block;
     }
 }
