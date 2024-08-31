@@ -18,138 +18,150 @@
 <body>
     <div class="container">
         <h1>Homebrewery Stat Block Generator</h1>
+        <div class="tabs">
+            <input type="radio" id="tab1" name="tab-group" checked>
+            <label for="tab1">Tab 1</label>
+
+            <input type="radio" id="tab2" name="tab-group">
+            <label for="tab2">Tab 2</label>
+            <div class="content">
+                <div class="content1">
+                    <!-- Creature Stat Block Form -->
+                    <h2>Creature Stat Block</h2>
+                    <form id="stat-block-form">
+                        <label for="creature-name">Creature Name:</label>
+                        <input type="text" id="creature-name" name="creature-name">
+                        
+                        <label for="creature-type">Creature Type:</label>
+                        <input type="text" id="creature-type" name="creature-type">
+                        
+                        <label for="creature-ac">Armor Class:</label>
+                        <input type="text" id="creature-ac" name="creature-ac">
+                        
+                        <label for="creature-hp">Hit Points:</label>
+                        <input type="text" id="creature-hp" name="creature-hp">
+                        
+                        <label for="creature-speed">Speed:</label>
+                        <input type="text" id="creature-speed" name="creature-speed">
+                        
+                        <label for="creature-str">Strength (STR):</label>
+                        <input type="text" id="creature-str" name="creature-str">
+                        
+                        <label for="creature-dex">Dexterity (DEX):</label>
+                        <input type="text" id="creature-dex" name="creature-dex">
+                        
+                        <label for="creature-con">Constitution (CON):</label>
+                        <input type="text" id="creature-con" name="creature-con">
+                        
+                        <label for="creature-int">Intelligence (INT):</label>
+                        <input type="text" id="creature-int" name="creature-int">
+                        
+                        <label for="creature-wis">Wisdom (WIS):</label>
+                        <input type="text" id="creature-wis" name="creature-wis">
+                        
+                        <label for="creature-cha">Charisma (CHA):</label>
+                        <input type="text" id="creature-cha" name="creature-cha">
+                        
+                        <label for="creature-saving-throws">Saving Throws:</label>
+                        <input type="text" id="creature-saving-throws" name="creature-saving-throws">
+                        
+                        <label for="creature-skills">Skills:</label>
+                        <input type="text" id="creature-skills" name="creature-skills">
+                        
+                        <label for="creature-senses">Senses:</label>
+                        <input type="text" id="creature-senses" name="creature-senses">
+                        
+                        <label for="creature-languages">Languages:</label>
+                        <input type="text" id="creature-languages" name="creature-languages">
+                        
+                        <label for="creature-challenge">Challenge:</label>
+                        <input type="text" id="creature-challenge" name="creature-challenge">
+                        
+                        <label for="creature-traits">Traits (one per line):</label>
+                        <textarea id="creature-traits" name="creature-traits"></textarea>
+                        
+                        <label for="creature-actions">Actions (one per line):</label>
+                        <textarea id="creature-actions" name="creature-actions"></textarea>
+                        
+                        <label for="creature-bonus-actions">Bonus Actions (one per line):</label>
+                        <textarea id="creature-bonus-actions" name="creature-bonus-actions"></textarea>
+                        
+                        <label for="creature-reactions">Reactions (one per line):</label>
+                        <textarea id="creature-reactions" name="creature-reactions"></textarea>
+                        
+                        <label for="creature-legendary-actions">Legendary Actions (one per line):</label>
+                        <textarea id="creature-legendary-actions" name="creature-legendary-actions"></textarea>
+                        
+                        <label for="creature-spellcasting">Spellcasting (optional):</label>
+                        <textarea id="creature-spellcasting" name="creature-spellcasting"></textarea>
+                        
+                        <button type="button" onclick="generateStatBlock()">Generate Stat Block</button>
+                    </form>
+                </div>
+    
+                <div class="content2">
+                    <!-- Item Card Section -->
+                    <h2>Create an Item Card</h2>
+                    <form id="item-form">
+                        <label for="itemName">Item Name:</label><br>
+                        <input type="text" id="itemName" name="itemName"><br><br>
+                        
+                        <label for="itemType">Item Type:</label><br>
+                        <input type="text" id="itemType" name="itemType"><br><br>
+                        
+                        <label for="itemImage">Item Image URL:</label><br>
+                        <input type="text" id="itemImage" name="itemImage"><br><br>
+                        
+                        <label for="itemCategory">Category:</label><br>
+                        <input type="text" id="itemCategory" name="itemCategory"><br><br>
+                        
+                        <label for="itemAttunement">Attunement:</label><br>
+                        <input type="text" id="itemAttunement" name="itemAttunement"><br><br>
+                        
+                        <label for="itemDamage">Damage:</label><br>
+                        <input type="text" id="itemDamage" name="itemDamage"><br><br>
+                        
+                        <label for="itemDamageType">Damage Type:</label><br>
+                        <input type="text" id="itemDamageType" name="itemDamageType"><br><br>
+                        
+                        <label for="itemProperties">Properties:</label><br>
+                        <input type="text" id="itemProperties" name="itemProperties"><br><br>
+                        
+                        <label for="itemRange">Range:</label><br>
+                        <input type="text" id="itemRange" name="itemRange"><br><br>
+                        
+                        <label for="itemWeight">Weight:</label><br>
+                        <input type="text" id="itemWeight" name="itemWeight"><br><br>
+                        
+                        <label for="itemValue">Value:</label><br>
+                        <input type="text" id="itemValue" name="itemValue"><br><br>
+                        
+                        <label for="itemEnchantment">Enchantment:</label><br>
+                        <textarea id="itemEnchantment" name="itemEnchantment"></textarea><br><br>
+                        
+                        <label for="itemSpellCasting">Spell Casting:</label><br>
+                        <textarea id="itemSpellCasting" name="itemSpellCasting"></textarea><br><br>
+                        
+                        <label for="itemSpellDetails">Spell Details:</label><br>
+                        <textarea id="itemSpellDetails" name="itemSpellDetails"></textarea><br><br>
+                        
+                        <label for="itemDailySpells">Daily Spells:</label><br>
+                        <textarea id="itemDailySpells" name="itemDailySpells"></textarea><br><br>
+                        
+                        <label for="itemWeeklySpells">Weekly Spells:</label><br>
+                        <textarea id="itemWeeklySpells" name="itemWeeklySpells"></textarea><br><br>
+                        
+                        <button type="button" onclick="generateItemCard()">Generate Item Card</button>
+                    </form>
+                </div>
+            </div>
+        </div>
         
-        <!-- Creature Stat Block Form -->
-        <h2>Creature Stat Block</h2>
-        <form id="stat-block-form">
-            <label for="creature-name">Creature Name:</label>
-            <input type="text" id="creature-name" name="creature-name">
-            
-            <label for="creature-type">Creature Type:</label>
-            <input type="text" id="creature-type" name="creature-type">
-            
-            <label for="creature-ac">Armor Class:</label>
-            <input type="text" id="creature-ac" name="creature-ac">
-            
-            <label for="creature-hp">Hit Points:</label>
-            <input type="text" id="creature-hp" name="creature-hp">
-            
-            <label for="creature-speed">Speed:</label>
-            <input type="text" id="creature-speed" name="creature-speed">
-            
-            <label for="creature-str">Strength (STR):</label>
-            <input type="text" id="creature-str" name="creature-str">
-            
-            <label for="creature-dex">Dexterity (DEX):</label>
-            <input type="text" id="creature-dex" name="creature-dex">
-            
-            <label for="creature-con">Constitution (CON):</label>
-            <input type="text" id="creature-con" name="creature-con">
-            
-            <label for="creature-int">Intelligence (INT):</label>
-            <input type="text" id="creature-int" name="creature-int">
-            
-            <label for="creature-wis">Wisdom (WIS):</label>
-            <input type="text" id="creature-wis" name="creature-wis">
-            
-            <label for="creature-cha">Charisma (CHA):</label>
-            <input type="text" id="creature-cha" name="creature-cha">
-            
-            <label for="creature-saving-throws">Saving Throws:</label>
-            <input type="text" id="creature-saving-throws" name="creature-saving-throws">
-            
-            <label for="creature-skills">Skills:</label>
-            <input type="text" id="creature-skills" name="creature-skills">
-            
-            <label for="creature-senses">Senses:</label>
-            <input type="text" id="creature-senses" name="creature-senses">
-            
-            <label for="creature-languages">Languages:</label>
-            <input type="text" id="creature-languages" name="creature-languages">
-            
-            <label for="creature-challenge">Challenge:</label>
-            <input type="text" id="creature-challenge" name="creature-challenge">
-            
-            <label for="creature-traits">Traits (one per line):</label>
-            <textarea id="creature-traits" name="creature-traits"></textarea>
-            
-            <label for="creature-actions">Actions (one per line):</label>
-            <textarea id="creature-actions" name="creature-actions"></textarea>
-            
-            <label for="creature-bonus-actions">Bonus Actions (one per line):</label>
-            <textarea id="creature-bonus-actions" name="creature-bonus-actions"></textarea>
-            
-            <label for="creature-reactions">Reactions (one per line):</label>
-            <textarea id="creature-reactions" name="creature-reactions"></textarea>
-            
-            <label for="creature-legendary-actions">Legendary Actions (one per line):</label>
-            <textarea id="creature-legendary-actions" name="creature-legendary-actions"></textarea>
-            
-            <label for="creature-spellcasting">Spellcasting (optional):</label>
-            <textarea id="creature-spellcasting" name="creature-spellcasting"></textarea>
-            
-            <button type="button" onclick="generateStatBlock()">Generate Stat Block</button>
-        </form>
-
-        <!-- Item Card Section -->
-        <h2>Create an Item Card</h2>
-        <form id="item-form">
-            <label for="itemName">Item Name:</label><br>
-            <input type="text" id="itemName" name="itemName"><br><br>
-            
-            <label for="itemType">Item Type:</label><br>
-            <input type="text" id="itemType" name="itemType"><br><br>
-            
-            <label for="itemImage">Item Image URL:</label><br>
-            <input type="text" id="itemImage" name="itemImage"><br><br>
-            
-            <label for="itemCategory">Category:</label><br>
-            <input type="text" id="itemCategory" name="itemCategory"><br><br>
-            
-            <label for="itemAttunement">Attunement:</label><br>
-            <input type="text" id="itemAttunement" name="itemAttunement"><br><br>
-            
-            <label for="itemDamage">Damage:</label><br>
-            <input type="text" id="itemDamage" name="itemDamage"><br><br>
-            
-            <label for="itemDamageType">Damage Type:</label><br>
-            <input type="text" id="itemDamageType" name="itemDamageType"><br><br>
-            
-            <label for="itemProperties">Properties:</label><br>
-            <input type="text" id="itemProperties" name="itemProperties"><br><br>
-            
-            <label for="itemRange">Range:</label><br>
-            <input type="text" id="itemRange" name="itemRange"><br><br>
-            
-            <label for="itemWeight">Weight:</label><br>
-            <input type="text" id="itemWeight" name="itemWeight"><br><br>
-            
-            <label for="itemValue">Value:</label><br>
-            <input type="text" id="itemValue" name="itemValue"><br><br>
-            
-            <label for="itemEnchantment">Enchantment:</label><br>
-            <textarea id="itemEnchantment" name="itemEnchantment"></textarea><br><br>
-            
-            <label for="itemSpellCasting">Spell Casting:</label><br>
-            <textarea id="itemSpellCasting" name="itemSpellCasting"></textarea><br><br>
-            
-            <label for="itemSpellDetails">Spell Details:</label><br>
-            <textarea id="itemSpellDetails" name="itemSpellDetails"></textarea><br><br>
-            
-            <label for="itemDailySpells">Daily Spells:</label><br>
-            <textarea id="itemDailySpells" name="itemDailySpells"></textarea><br><br>
-            
-            <label for="itemWeeklySpells">Weekly Spells:</label><br>
-            <textarea id="itemWeeklySpells" name="itemWeeklySpells"></textarea><br><br>
-            
-            <button type="button" onclick="generateItemCard()">Generate Item Card</button>
-        </form>
-
         <h2>Output</h2>
         <div class="container">
             <pre id="output"></pre>
             <button type="button" onclick="copyOutputToClipboard()">Copy to Clipboard</button>
-        </div>
+         </div>
         <p>Inspired by the <a href="https://homebrewery.naturalcrit.com/new"">Homebrewery.</a></p>
     </div>
     <script src="script.js"></script>
