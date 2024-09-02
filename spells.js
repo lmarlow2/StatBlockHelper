@@ -507,7 +507,7 @@ const spellUrls = {
   "Zone of Truth": "https://5e.tools/spells.html#zone%20of%20truth_phb"
 };
 
-export function addSpellToStatBlock(spellName){
+function addSpellToStatBlock(spellName){
     let spellLink = spellUrls[spellName];
     if(spellLink){
         return `<a href="${spellLink}" target="_blank">${spellName}</a>`;
