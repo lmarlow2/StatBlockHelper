@@ -1,3 +1,5 @@
+import { addSpellToStatBlock } from './spells.js'
+
 function calculateBonus(stat){
     stat = Number(stat);
     modifier = (stat - 10)/2;
@@ -59,7 +61,9 @@ function generateStatBlock(){
     });
 
     if(creatureSpellcasting){
-        output += `> ### Spellcasting\n${creatureSpellcasting}\n`;
+        creatureSpellcasting.split('\n').forEach((spell) => {
+            output += `> - **${addSpellToStatBlock(spell)}**`
+        });
     }
 
     output += `> ### Actions\n`;
