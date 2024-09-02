@@ -59,8 +59,9 @@ function generateStatBlock(){
     });
 
     if(creatureSpellcasting){
+        output += `> ### Spellcasting\n${creatureName} has the following spells prepared:`
         creatureSpellcasting.split('\n').forEach((spell) => {
-            output += `> - **${addSpellToStatBlock(spell)}**`
+            output += `> - **${addSpellToStatBlock(spell)}**\n`
         });
     }
 
