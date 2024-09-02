@@ -1,5 +1,3 @@
-import { addSpellToStatBlock } from './spells.js'
-
 function calculateBonus(stat){
     stat = Number(stat);
     modifier = (stat - 10)/2;
