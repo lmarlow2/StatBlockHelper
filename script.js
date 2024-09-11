@@ -65,11 +65,17 @@ function generateStatBlock(){
     const creatureSpeed = document.getElementById('creature-speed').value;
 
     const creatureStr = document.getElementById('creature-str').value;
+    const strBonus = calculateBonus(creatureStr);
     const creatureDex = document.getElementById('creature-dex').value;
+    const dexBonus = calculateBonus(creatureDex);
     const creatureCon = document.getElementById('creature-con').value;
+    const conBonus = calculateBonus(creatureCon);
     const creatureInt = document.getElementById('creature-int').value;
+    const intBonus = calculateBonus(creatureInt);
     const creatureWis = document.getElementById('creature-wis').value;
+    const wisBonus = calculateBonus(creatureWis);
     const creatureCha = document.getElementById('creature-cha').value;
+    const chaBonus = calculateBonus(creatureCha);
 
     const creatureProficiencyModifier = document.getElementById('creature-proficiency-modifier').value;
     //const creatureSavingThrows = document.getElementById('creature-saving-throws').value;
@@ -91,14 +97,14 @@ function generateStatBlock(){
     output += `> - **Speed** ${creatureSpeed}\n> ___\n`;
     output += `> | STR | DEX | CON | INT | WIS | CHA |\n`;
     output += `> |:---:|:---:|:---:|:---:|:---:|:---:|\n`;
-    output += `> | ${creatureStr} ${calculateBonus(creatureStr)} | ${creatureDex} ${calculateBonus(creatureDex)} | ${creatureCon} ${calculateBonus(creatureCon)} | ${creatureInt} ${calculateBonus(creatureInt)} | ${creatureWis} ${calculateBonus(creatureWis)} | ${creatureCha} ${calculateBonus(creatureCha)} |\n> ___\n`;
+    output += `> | ${creatureStr} ${strBonus} | ${creatureDex} ${dexBonus} | ${creatureCon} ${conBonus} | ${creatureInt} ${intBonus} | ${creatureWis} ${wisBonus} | ${creatureCha} ${chaBonus} |\n> ___\n`;
 
     if(creatureProficiencyModifier){
         if(creatureSavingThrows){
-            output += `> - **Saving Throws** ${creatureSavingThrows(creatureProficiencyModifier, creatureStr, creatureDex, creatureCon, creatureInt, creatureWis, creatureCha)}\n`;
+            output += `> - **Saving Throws** ${creatureSavingThrows(creatureProficiencyModifier, strBonus, dexBonus, conBonus, intBonus, wisBonus, chaBonus)}\n`;
         }
         if(creatureSkills){
-            output += `> - **Skills** ${creatureSkills(creatureProficiencyModifier, creatureStr, creatureDex, creatureCon, creatureInt, creatureWis, creatureCha)}\n`;
+            output += `> - **Skills** ${creatureSkills(creatureProficiencyModifier, strBonus, dexBonus, conBonus, intBonus, wisBonus, chaBonus)}\n`;
         }
     }
     if(creatureSenses){
