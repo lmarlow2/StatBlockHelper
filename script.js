@@ -5,6 +5,58 @@ function calculateBonus(stat){
     return "(" + (modifier<0?"":"+") + modifier + ")";
 }
 
+function creatureSavingThrows(profMod, str, dex, con, int, wis, cha){
+    profMod = Number(profMod);
+    str = Number(str);
+    dex = Number(dex);
+    con = Number(con);
+    int = Number(int);
+    wis = Number(wis);
+    cha = Number(cha);
+
+    const savingThrows = [];
+    if(document.getElementById("strength-save").checked) savingThrows.push("Str +" + (str + profMod));
+    if(document.getElementById("dexterity-save").checked) savingThrows.push("Dex +" + (dex + profMod));
+    if(document.getElementById("constitution-save").checked) savingThrows.push("Con +" + (con + profMod));
+    if(document.getElementById("intelligence-save").checked) savingThrows.push("Int +" + (int + profMod));
+    if(document.getElementById("wisdom-save").checked) savingThrows.push("Wis +" + (wis + profMod));
+    if(document.getElementById("charisma-save").checked) savingThrows.push("Cha +" + (cha + profMod));
+
+    return savingThrows.join(', ');
+}
+
+function creatureSkills(profMod, str, dex, con, int, wis, cha){
+    profMod = Number(profMod);
+    str = Number(str);
+    dex = Number(dex);
+    con = Number(con);
+    int = Number(int);
+    wis = Number(wis);
+    cha = Number(cha);
+
+    const skills = [];
+    if(document.getElementById("acrobatics").checked) skills.push("Acrobatics +" + (dex + profMod));
+    if(document.getElementById("animal-handling").checked) skills.push("Animal Handling +" + (wis + profMod));
+    if(document.getElementById("arcana").checked) skills.push("Arcana +" + (int + profMod));
+    if(document.getElementById("athletics").checked) skills.push("Athletics +" + (str + profMod));
+    if(document.getElementById("deception").checked) skills.push("Deception +" + (cha + profMod));
+    if(document.getElementById("history").checked) skills.push("History +" + (int + profMod));
+    if(document.getElementById("insight").checked) skills.push("Insight +" + (wis + profMod));
+    if(document.getElementById("intimidation").checked) skills.push("Intimidation +" + (cha + profMod));
+    if(document.getElementById("investigation").checked) skills.push("Investigation +" + (int + profMod));
+    if(document.getElementById("medicine").checked) skills.push("Medicine +" + (wis + profMod));
+    if(document.getElementById("nature").checked) skills.push("Nature +" + (int + profMod));
+    if(document.getElementById("perception").checked) skills.push("Perception +" + (wis + profMod));
+    if(document.getElementById("performance").checked) skills.push("Performance +" + (cha + profMod));
+    if(document.getElementById("persuasion").checked) skills.push("Persuasion +" + (cha + profMod));
+    if(document.getElementById("religion").checked) skills.push("Religion +" + (int + profMod));
+    if(document.getElementById("sleight-of-hand").checked) skills.push("Sleight of Hand +" + (dex + profMod));
+    if(document.getElementById("stealth").checked) skills.push("Stealth +" + (dex + profMod));
+    if(document.getElementById("survival").checked) skills.push("Survival +" + (wis + profMod));
+
+    return skills.join(', ');
+}
+
 function generateStatBlock(){
     const creatureName = document.getElementById('creature-name').value;
     const creatureType = document.getElementById('creature-type').value;
@@ -19,8 +71,9 @@ function generateStatBlock(){
     const creatureWis = document.getElementById('creature-wis').value;
     const creatureCha = document.getElementById('creature-cha').value;
 
-    const creatureSavingThrows = document.getElementById('creature-saving-throws').value;
-    const creatureSkills = document.getElementById('creature-skills').value;
+    const creatureProficiencyModifier = document.getElementById('creature-proficiency-modifier').value;
+    //const creatureSavingThrows = document.getElementById('creature-saving-throws').value;
+    //const creatureSkills = document.getElementById('creature-skills').value;
     const creatureSenses = document.getElementById('creature-senses').value;
     const creatureLanguages = document.getElementById('creature-languages').value;
     const creatureChallenge = document.getElementById('creature-challenge').value;
@@ -40,14 +93,19 @@ function generateStatBlock(){
     output += `> |:---:|:---:|:---:|:---:|:---:|:---:|\n`;
     output += `> | ${creatureStr} ${calculateBonus(creatureStr)} | ${creatureDex} ${calculateBonus(creatureDex)} | ${creatureCon} ${calculateBonus(creatureCon)} | ${creatureInt} ${calculateBonus(creatureInt)} | ${creatureWis} ${calculateBonus(creatureWis)} | ${creatureCha} ${calculateBonus(creatureCha)} |\n> ___\n`;
 
-    if(creatureSavingThrows){
-        output += `> - **Saving Throws** ${creatureSavingThrows}\n`;
-    }
-    if(creatureSkills){
-        output += `> - **Skills** ${creatureSkills}\n`;
+    if(creatureProficiencyModifier){
+        if(creatureSavingThrows){
+            output += `> - **Saving Throws** ${creatureSavingThrows(creatureProficiencyModifier, creatureStr, creatureDex, creatureCon, creatureInt, creatureWis, creatureCha)}\n`;
+        }
+        if(creatureSkills){
+            output += `> - **Skills** ${creatureSkills(creatureProficiencyModifier, creatureStr, creatureDex, creatureCon, creatureInt, creatureWis, creatureCha)}\n`;
+        }
     }
     if(creatureSenses){
         output += `> - **Senses** ${creatureSenses}\n`;
+    }
+    if(creatureProficiencyModifier){
+        output += `> - **Proficiency Modifier** +${creatureProficiencyModifier}\n`;
     }
     if(creatureLanguages){
         output += `> - **Languages** ${creatureLanguages}\n`;
