@@ -7,12 +7,12 @@ function calculateBonus(stat){
 
 function creatureSavingThrows(profMod, str, dex, con, int, wis, cha){
     profMod = Number(profMod);
-    str = Number(str.match(/(\d+)/));
-    dex = Number(dex.match(/(\d+)/));
-    con = Number(con.match(/(\d+)/));
-    int = Number(int.match(/(\d+)/));
-    wis = Number(wis.match(/(\d+)/));
-    cha = Number(cha.match(/(\d+)/));
+    str = Number(str.match(/(\d+)/)[0]);
+    dex = Number(dex.match(/(\d+)/)[0]);
+    con = Number(con.match(/(\d+)/)[0]);
+    int = Number(int.match(/(\d+)/)[0]);
+    wis = Number(wis.match(/(\d+)/)[0]);
+    cha = Number(cha.match(/(\d+)/)[0]);
 
     const savingThrows = [];
     if(document.getElementById("strength-save").checked) savingThrows.push("Str +" + (str + profMod));
@@ -27,12 +27,12 @@ function creatureSavingThrows(profMod, str, dex, con, int, wis, cha){
 
 function creatureSkills(profMod, str, dex, con, int, wis, cha){
     profMod = Number(profMod);
-    str = Number(str.match(/(\d+)/));
-    dex = Number(dex.match(/(\d+)/));
-    con = Number(con.match(/(\d+)/));
-    int = Number(int.match(/(\d+)/));
-    wis = Number(wis.match(/(\d+)/));
-    cha = Number(cha.match(/(\d+)/));
+    str = Number(str.match(/(\d+)/)[0]);
+    dex = Number(dex.match(/(\d+)/)[0]);
+    con = Number(con.match(/(\d+)/)[0]);
+    int = Number(int.match(/(\d+)/)[0]);
+    wis = Number(wis.match(/(\d+)/)[0]);
+    cha = Number(cha.match(/(\d+)/)[0]);
 
     const skills = [];
     if(document.getElementById("acrobatics").checked) skills.push("Acrobatics +" + (dex + profMod));
@@ -110,13 +110,10 @@ function generateStatBlock(){
     if(creatureSenses){
         output += `> - **Senses** ${creatureSenses}\n`;
     }
-    if(creatureProficiencyModifier){
-        output += `> - **Proficiency Modifier** +${creatureProficiencyModifier}\n`;
-    }
     if(creatureLanguages){
         output += `> - **Languages** ${creatureLanguages}\n`;
     }
-    output += `> - **Challenge** ${creatureChallenge} **Proficiency Bonus** +4\n> ___\n`;
+    output += `> - **Challenge** ${creatureChallenge} **Proficiency Bonus** +${creatureProficiencyModifier}\n> ___\n`;
 
     creatureTraits.forEach(trait => {
         output += `> ***${trait.split('.')[0]}.*** ${trait.substring(trait.indexOf('.') + 1)}\n>\n`;
