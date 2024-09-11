@@ -7,12 +7,12 @@ function calculateBonus(stat){
 
 function creatureSavingThrows(profMod, str, dex, con, int, wis, cha){
     profMod = Number(profMod);
-    str = Number(str);
-    dex = Number(dex);
-    con = Number(con);
-    int = Number(int);
-    wis = Number(wis);
-    cha = Number(cha);
+    str = Number(str.match(/(\d+)/));
+    dex = Number(dex.match(/(\d+)/));
+    con = Number(con.match(/(\d+)/));
+    int = Number(int.match(/(\d+)/));
+    wis = Number(wis.match(/(\d+)/));
+    cha = Number(cha.match(/(\d+)/));
 
     const savingThrows = [];
     if(document.getElementById("strength-save").checked) savingThrows.push("Str +" + (str + profMod));
@@ -27,12 +27,12 @@ function creatureSavingThrows(profMod, str, dex, con, int, wis, cha){
 
 function creatureSkills(profMod, str, dex, con, int, wis, cha){
     profMod = Number(profMod);
-    str = Number(str);
-    dex = Number(dex);
-    con = Number(con);
-    int = Number(int);
-    wis = Number(wis);
-    cha = Number(cha);
+    str = Number(str.match(/(\d+)/));
+    dex = Number(dex.match(/(\d+)/));
+    con = Number(con.match(/(\d+)/));
+    int = Number(int.match(/(\d+)/));
+    wis = Number(wis.match(/(\d+)/));
+    cha = Number(cha.match(/(\d+)/));
 
     const skills = [];
     if(document.getElementById("acrobatics").checked) skills.push("Acrobatics +" + (dex + profMod));
