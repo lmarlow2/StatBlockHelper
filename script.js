@@ -96,7 +96,7 @@ function generateStatBlock(){
     let output = `___\n___\n> ## ${creatureName}\n> *${creatureType}*\n> ___\n`;
 
     if(creatureArt){
-        output += `><img src='${creatureArt}' style='width:310px' />`
+        output += `><img src='${creatureArt}' style='width:310px' />\n`
     }
     
     output += `> - **Armor Class** ${creatureAC}\n`;
