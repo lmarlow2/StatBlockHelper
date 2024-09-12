@@ -63,7 +63,7 @@ function generateStatBlock(){
     const creatureAC = document.getElementById('creature-ac').value;
     const creatureHP = document.getElementById('creature-hp').value;
     const creatureSpeed = document.getElementById('creature-speed').value;
-
+    const creatureArt = document.getElementById('creature-art').value;
     const creatureStr = document.getElementById('creature-str').value;
     const strBonus = calculateBonus(creatureStr);
     const creatureDex = document.getElementById('creature-dex').value;
@@ -89,9 +89,16 @@ function generateStatBlock(){
     const creatureBonusActions = document.getElementById('creature-bonus-actions').value.split('\n').filter(line => line.trim() !== '');
     const creatureReactions = document.getElementById('creature-reactions').value.split('\n').filter(line => line.trim() !== '');
     const creatureLegendaryActions = document.getElementById('creature-legendary-actions').value.split('\n').filter(line => line.trim() !== '');
+    const creatureLairActions = document.getElementById('creature-lair-actions').value.split('\n').filter(line => line.trim() !== '');
+    const creatureFreeActions = document.getElementById('creature-free-actions').value.split('\n').filter(line => line.trim() !== '');
     const creatureSpellcasting = document.getElementById('creature-spellcasting').value;
 
     let output = `___\n___\n> ## ${creatureName}\n> *${creatureType}*\n> ___\n`;
+
+    if(creatureArt){
+        output += `><img src='${creatureArt}' style='width:310px' />`
+    }
+    
     output += `> - **Armor Class** ${creatureAC}\n`;
     output += `> - **Hit Points** ${creatureHP}\n`;
     output += `> - **Speed** ${creatureSpeed}\n> ___\n`;
@@ -100,11 +107,13 @@ function generateStatBlock(){
     output += `> | ${creatureStr} ${strBonus} | ${creatureDex} ${dexBonus} | ${creatureCon} ${conBonus} | ${creatureInt} ${intBonus} | ${creatureWis} ${wisBonus} | ${creatureCha} ${chaBonus} |\n> ___\n`;
 
     if(creatureProficiencyModifier){
+        const creatureSavingThrows = creatureSavingThrows(creatureProficiencyModifier, strBonus, dexBonus, conBonus, intBonus, wisBonus, chaBonus);
+        const creatureSkills = creatureSkills(creatureProficiencyModifier, strBonus, dexBonus, conBonus, intBonus, wisBonus, chaBonus);
         if(creatureSavingThrows){
-            output += `> - **Saving Throws** ${creatureSavingThrows(creatureProficiencyModifier, strBonus, dexBonus, conBonus, intBonus, wisBonus, chaBonus)}\n`;
+            output += `> - **Saving Throws** ${creatureSavingThrows}\n`;
         }
         if(creatureSkills){
-            output += `> - **Skills** ${creatureSkills(creatureProficiencyModifier, strBonus, dexBonus, conBonus, intBonus, wisBonus, chaBonus)}\n`;
+            output += `> - **Skills** ${creatureSkills}\n`;
         }
     }
     if(creatureSenses){
@@ -114,6 +123,7 @@ function generateStatBlock(){
         output += `> - **Languages** ${creatureLanguages}\n`;
     }
     output += `> - **Challenge** ${creatureChallenge} **Proficiency Bonus** +${creatureProficiencyModifier}\n> ___\n`;
+    //output += `> - **Challenge** ${calculateDefensiveCR(Number(creatureHP.match(/(\d+)/)[0]), Number(creatureAC.match(/(\d+)/)[0]))} **Proficiency Bonus** +${creatureProficiencyModifier}\n> ___\n`;
 
     creatureTraits.forEach(trait => {
         output += `> ***${trait.split('.')[0]}.*** ${trait.substring(trait.indexOf('.') + 1)}\n>\n`;
@@ -145,11 +155,26 @@ function generateStatBlock(){
         });
     }
 
+    if(creatureFreeActions.length > 0){
+        output += `> ### Free Actions\n`;
+        creatureReactions.forEach(action => {
+            output += `> ***${action.split('.')[0]}.*** ${action.substring(action.indexOf('.') + 1)}\n>\n`;
+        });
+    }
+
     if(creatureLegendaryActions.length > 0){
         output += `> ### Legendary Actions\n`;
         output += `> ${creatureName} can take 3 legendary actions, choosing from the options below. Only one legendary action can be used at a time and only at the end of another creature's turn. ${creatureName} regains spent legendary actions at the start of its turn.\n>\n`;
         creatureLegendaryActions.forEach(action => {
             output += `> ***${action.split('.')[0]}.*** ${action.substring(action.indexOf('.') + 1)}\n>\n`;
+        });
+    }
+
+    if(creatureLairActions.length > 0){
+        output += `> ### Lair Actions\n`;
+        output += `> When fighting inside its lair, ${creatureName} can invoke the ambient magic to take lair actions. On initiative count 20 (losing initiative ties), ${creatureName} takes a lair action to cause one of the following effects:\n>\n`;
+        creatureLegendaryActions.forEach(action => {
+            output += `> - ***${action.split('.')[0]}.*** ${action.substring(action.indexOf('.') + 1)}\n>\n`;
         });
     }
 
