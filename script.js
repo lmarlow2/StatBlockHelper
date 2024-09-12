@@ -107,13 +107,13 @@ function generateStatBlock(){
     output += `> | ${creatureStr} ${strBonus} | ${creatureDex} ${dexBonus} | ${creatureCon} ${conBonus} | ${creatureInt} ${intBonus} | ${creatureWis} ${wisBonus} | ${creatureCha} ${chaBonus} |\n> ___\n`;
 
     if(creatureProficiencyModifier){
-        const creatureSavingThrows = creatureSavingThrows(creatureProficiencyModifier, strBonus, dexBonus, conBonus, intBonus, wisBonus, chaBonus);
-        const creatureSkills = creatureSkills(creatureProficiencyModifier, strBonus, dexBonus, conBonus, intBonus, wisBonus, chaBonus);
-        if(creatureSavingThrows){
-            output += `> - **Saving Throws** ${creatureSavingThrows}\n`;
+        const saves = creatureSavingThrows(creatureProficiencyModifier, strBonus, dexBonus, conBonus, intBonus, wisBonus, chaBonus);
+        const skills = creatureSkills(creatureProficiencyModifier, strBonus, dexBonus, conBonus, intBonus, wisBonus, chaBonus);
+        if(saves){
+            output += `> - **Saving Throws** ${saves}\n`;
         }
-        if(creatureSkills){
-            output += `> - **Skills** ${creatureSkills}\n`;
+        if(skills){
+            output += `> - **Skills** ${skills}\n`;
         }
     }
     if(creatureSenses){
