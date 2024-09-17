@@ -2,18 +2,10 @@ function calculateBonus(stat){
     stat = Number(stat);
     modifier = (stat - 10)/2;
     modifier = (modifier > 0 ? Math.floor(modifier) : -1 * Math.round(Math.abs(modifier))) 
-    return "(" + (modifier<0?"":"+") + modifier + ")";
+    return ["(" + (modifier<0?"":"+") + modifier + ")", modifer];
 }
 
 function creatureSavingThrows(profMod, str, dex, con, int, wis, cha){
-    profMod = Number(profMod);
-    str = Number(str.match(/(\d+)/)[0]);
-    dex = Number(dex.match(/(\d+)/)[0]);
-    con = Number(con.match(/(\d+)/)[0]);
-    int = Number(int.match(/(\d+)/)[0]);
-    wis = Number(wis.match(/(\d+)/)[0]);
-    cha = Number(cha.match(/(\d+)/)[0]);
-
     const savingThrows = [];
     if(document.getElementById("strength-save").checked) savingThrows.push("Str +" + (str + profMod));
     if(document.getElementById("dexterity-save").checked) savingThrows.push("Dex +" + (dex + profMod));
@@ -26,14 +18,6 @@ function creatureSavingThrows(profMod, str, dex, con, int, wis, cha){
 }
 
 function creatureSkills(profMod, str, dex, con, int, wis, cha){
-    profMod = Number(profMod);
-    str = Number(str.match(/(\d+)/)[0]);
-    dex = Number(dex.match(/(\d+)/)[0]);
-    con = Number(con.match(/(\d+)/)[0]);
-    int = Number(int.match(/(\d+)/)[0]);
-    wis = Number(wis.match(/(\d+)/)[0]);
-    cha = Number(cha.match(/(\d+)/)[0]);
-
     const skills = [];
     if(document.getElementById("acrobatics").checked) skills.push("Acrobatics +" + (dex + profMod));
     if(document.getElementById("animal-handling").checked) skills.push("Animal Handling +" + (wis + profMod));
@@ -77,7 +61,7 @@ function generateStatBlock(){
     const creatureCha = document.getElementById('creature-cha').value;
     const chaBonus = calculateBonus(creatureCha);
 
-    const creatureProficiencyModifier = document.getElementById('creature-proficiency-modifier').value;
+    const creatureProficiencyModifier = Number(document.getElementById('creature-proficiency-modifier').value);
     //const creatureSavingThrows = document.getElementById('creature-saving-throws').value;
     //const creatureSkills = document.getElementById('creature-skills').value;
     const creatureSenses = document.getElementById('creature-senses').value;
@@ -92,6 +76,7 @@ function generateStatBlock(){
     const creatureLairActions = document.getElementById('creature-lair-actions').value.split('\n').filter(line => line.trim() !== '');
     const creatureFreeActions = document.getElementById('creature-free-actions').value.split('\n').filter(line => line.trim() !== '');
     const creatureSpellcasting = document.getElementById('creature-spellcasting').value;
+    const creatureSpellcastingAbility = document.getElementByID('creature-spellcasting-ability').value;
 
     let output = `___\n___\n> ## ${creatureName}\n> *${creatureType}*\n> ___\n`;
 
@@ -104,11 +89,11 @@ function generateStatBlock(){
     output += `> - **Speed** ${creatureSpeed}\n> ___\n`;
     output += `> | STR | DEX | CON | INT | WIS | CHA |\n`;
     output += `> |:---:|:---:|:---:|:---:|:---:|:---:|\n`;
-    output += `> | ${creatureStr} ${strBonus} | ${creatureDex} ${dexBonus} | ${creatureCon} ${conBonus} | ${creatureInt} ${intBonus} | ${creatureWis} ${wisBonus} | ${creatureCha} ${chaBonus} |\n> ___\n`;
+    output += `> | ${creatureStr} ${strBonus[0]} | ${creatureDex[} ${dexBonus[0]} | ${creatureCon} ${conBonus[0]} | ${creatureInt} ${intBonus[0]} | ${creatureWis} ${wisBonus[0]} | ${creatureCha} ${chaBonus[0]} |\n> ___\n`;
 
     if(creatureProficiencyModifier){
-        const saves = creatureSavingThrows(creatureProficiencyModifier, strBonus, dexBonus, conBonus, intBonus, wisBonus, chaBonus);
-        const skills = creatureSkills(creatureProficiencyModifier, strBonus, dexBonus, conBonus, intBonus, wisBonus, chaBonus);
+        const saves = creatureSavingThrows(creatureProficiencyModifier, strBonus[1], dexBonus[1], conBonus[1], intBonus[1], wisBonus[1], chaBonus[1]);
+        const skills = creatureSkills(creatureProficiencyModifier, strBonus[1], dexBonus[1], conBonus[1], intBonus[1], wisBonus[1], chaBonus[1]);
         if(saves){
             output += `> - **Saving Throws** ${saves}\n`;
         }
@@ -130,7 +115,10 @@ function generateStatBlock(){
     });
 
     if(creatureSpellcasting){
-        output += `> ### Spellcasting\n${creatureName} has the following spells prepared:\n`
+        const spellCastingAbility = ["Strength", "Dexterity", "Constitution", "Intelligence", "Wisdom", "Charisma"][creatureSpellcastingAbility];
+        const spellCastingModifier = creatureProficiencyModifier + [strBonus[1], dexBonus[1], conBonus[1], intBonus[1], wisBonus[1], chaBonus[1]][creatureSpellcastingAbility];
+        const spellSaveDC = 8 + spellCastingModifier;
+        output += `> ### Spellcasting\n${creatureName}'s spellcasting ability is ${spellCastingAbility} (spell save DC ${spellSaveDC}, +${spellCastingModifier} to hit with spell attacks). ${creatureName} has the following spells prepared:\n`
         creatureSpellcasting.split('\n').forEach((spell) => {
             output += `> - **${addSpellToStatBlock(spell)}**\n`
         });
