@@ -2,7 +2,7 @@ function calculateBonus(stat){
     stat = Number(stat);
     modifier = (stat - 10)/2;
     modifier = (modifier > 0 ? Math.floor(modifier) : -1 * Math.round(Math.abs(modifier))) 
-    return ["(" + (modifier<0?"":"+") + modifier + ")", modifer];
+    return ["(" + (modifier<0?"":"+") + modifier + ")", modifier];
 }
 
 function creatureSavingThrows(profMod, str, dex, con, int, wis, cha){
