@@ -76,7 +76,7 @@ function generateStatBlock(){
     const creatureLairActions = document.getElementById('creature-lair-actions').value.split('\n').filter(line => line.trim() !== '');
     const creatureFreeActions = document.getElementById('creature-free-actions').value.split('\n').filter(line => line.trim() !== '');
     const creatureSpellcasting = document.getElementById('creature-spellcasting').value;
-    const creatureSpellcastingAbility = document.getElementByID('creature-spellcasting-ability').value;
+    const creatureSpellcastingAbility = document.getElementById('creature-spellcasting-ability').value;
 
     let output = `___\n___\n> ## ${creatureName}\n> *${creatureType}*\n> ___\n`;
 
@@ -89,7 +89,7 @@ function generateStatBlock(){
     output += `> - **Speed** ${creatureSpeed}\n> ___\n`;
     output += `> | STR | DEX | CON | INT | WIS | CHA |\n`;
     output += `> |:---:|:---:|:---:|:---:|:---:|:---:|\n`;
-    output += `> | ${creatureStr} ${strBonus[0]} | ${creatureDex[} ${dexBonus[0]} | ${creatureCon} ${conBonus[0]} | ${creatureInt} ${intBonus[0]} | ${creatureWis} ${wisBonus[0]} | ${creatureCha} ${chaBonus[0]} |\n> ___\n`;
+    output += `> | ${creatureStr} ${strBonus[0]} | ${creatureDex} ${dexBonus[0]} | ${creatureCon} ${conBonus[0]} | ${creatureInt} ${intBonus[0]} | ${creatureWis} ${wisBonus[0]} | ${creatureCha} ${chaBonus[0]} |\n> ___\n`;
 
     if(creatureProficiencyModifier){
         const saves = creatureSavingThrows(creatureProficiencyModifier, strBonus[1], dexBonus[1], conBonus[1], intBonus[1], wisBonus[1], chaBonus[1]);
@@ -145,7 +145,7 @@ function generateStatBlock(){
 
     if(creatureFreeActions.length > 0){
         output += `> ### Free Actions\n`;
-        creatureReactions.forEach(action => {
+        creatureFreeActions.forEach(action => {
             output += `> ***${action.split('.')[0]}.*** ${action.substring(action.indexOf('.') + 1)}\n>\n`;
         });
     }
