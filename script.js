@@ -130,7 +130,7 @@ function generateStatBlock(){
     });
 
     if(creatureSpellcasting){
-        output += `> ### Spellcasting\n${creatureName} has the following spells prepared:`
+        output += `> ### Spellcasting\n${creatureName} has the following spells prepared:\n`
         creatureSpellcasting.split('\n').forEach((spell) => {
             output += `> - **${addSpellToStatBlock(spell)}**\n`
         });
